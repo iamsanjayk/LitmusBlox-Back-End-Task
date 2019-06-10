@@ -65,6 +65,7 @@ public class SheetsQuickstart {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1xbo1v9Tu1YdegXPnO4mYcA_jUitcCvm3bZzLOHSo5rY";
         final String range = "A2:K6";
+        int i=0;
         Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
@@ -75,11 +76,28 @@ public class SheetsQuickstart {
         if (values == null || values.isEmpty()) {
             System.out.println("No data found.");
         } else {
+        	
         	System.out.println();
-            System.out.println("Status, Priority, Deadline, Fixed Cost, Actual Hours");
+           
             for (List row : values) {
                 // Print columns A and E, which correspond to indices 0 and 4.
-                System.out.printf("%s, %s, %s, %s, %s\n", row.get(0), row.get(1), row.get(2), row.get(8), row.get(10));
+            	
+            	if(i==0)
+            	{
+            		System.out.println("---OUTPUT---");
+            		System.out.println();
+            		System.out.print("Total of Fixed Cost:");
+            		System.out.println(row.get(8));
+            		System.out.print("Total of Actual Hours:");
+            		System.out.println(row.get(10));
+            		System.out.println();
+            		System.out.println("Status, Priority, Deadline, Fixed Cost, Actual Hours");
+            		i=1;
+            	}
+            	else
+            	{
+            		System.out.printf("%s, %s, %s, %s, %s\n", row.get(0), row.get(1), row.get(2), row.get(8), row.get(10));
+            	}
             }
         }
     }
